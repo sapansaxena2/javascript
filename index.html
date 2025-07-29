@@ -10,9 +10,23 @@
   </style>
 </head>
 <body>
-    <h1>Welcome to Learning Git</h1>
-    <p>This is a simple HTML page to demonstrate the use of Git for version control.</p>
-    <p>Feel free to explore the code and make changes!</p>      
-    
+
+  <h1>Background color will change every 30 seconds</h1>
+
+  <script>
+    const colors = ["#FFB6C1", "#87CEFA", "#90EE90", "#FFD700", "#FF6347", "#D8BFD8"];
+
+    function changeBackgroundColor() {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.backgroundColor = randomColor;
+    }
+
+    // Initial color change
+    changeBackgroundColor();
+
+    // Change every 30 seconds (30,000 milliseconds)
+    setInterval(changeBackgroundColor, 30000);
+  </script>
+
 </body>
 </html>
