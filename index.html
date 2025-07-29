@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Color Changer</title>
+  <title>Random Color Changer</title>
   <style>
     body {
       transition: background-color 0.5s ease;
@@ -11,20 +11,24 @@
 </head>
 <body>
 
-  <h1>Background color will change every 30 seconds</h1>
+  <h1>Background color changes every 10 seconds</h1>
 
   <script>
-    const colors = ["#FFB6C1", "#87CEFA", "#90EE90", "#FFD700", "#FF6347", "#D8BFD8"];
-
-    function changeBackgroundColor() {
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      document.body.style.backgroundColor = randomColor;
+    function getRandomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
     }
 
-    // Initial color change
+    function changeBackgroundColor() {
+      document.body.style.backgroundColor = getRandomColor();
+    }
+
+    // Initial call
     changeBackgroundColor();
 
-    // Change every 30 seconds (30,000 milliseconds)
+    // Change every 30 seconds
     setInterval(changeBackgroundColor, 10000);
   </script>
 
