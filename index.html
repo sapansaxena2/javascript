@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Color Changer</title>
+  <title>Light Color Changer</title>
   <style>
     body {
-      transition: background-color 0.2s ease;
+      transition: background-color 0.3s ease;
     }
   </style>
 </head>
 <body>
 
-  <h1>Background color changes every 2 seconds</h1>
+  <h1>Background changes to a light color every 3 seconds</h1>
 
   <script>
-    function getRandomColor() {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
+    function getLightColor() {
+      const r = Math.floor(Math.random() * 76) + 180; // 180–255
+      const g = Math.floor(Math.random() * 76) + 180;
+      const b = Math.floor(Math.random() * 76) + 180;
       return `rgb(${r}, ${g}, ${b})`;
     }
 
     function changeBackgroundColor() {
-      document.body.style.backgroundColor = getRandomColor();
+      document.body.style.backgroundColor = getLightColor();
     }
 
-    // Initial call
+    // Initial change
     changeBackgroundColor();
 
-    // Change every 5 seconds
-    setInterval(changeBackgroundColor, 2000);
+    // Repeat every 3 seconds
+    setInterval(changeBackgroundColor, 3000);
   </script>
 
 </body>
