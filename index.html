@@ -2,18 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Light Color Changer</title>
+  <title>Light & Dark Mode with Color Changer</title>
   <style>
     body {
-      transition: background-color 0.3s ease;
+      transition: background-color 0.5s ease, color 0.5s ease;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <h1>Background changes to a light color every 3 seconds</h1>
+  <h1>Auto Background Color Changer</h1>
+  <p>Mode: <span id="modeLabel">Light</span></p>
+  <button onclick="toggleMode()">Toggle Mode</button>
 
   <script>
+    let mode = 'light';
+
     function getLightColor() {
       const r = Math.floor(Math.random() * 76) + 180; // 180–255
       const g = Math.floor(Math.random() * 76) + 180;
@@ -21,15 +34,30 @@
       return `rgb(${r}, ${g}, ${b})`;
     }
 
-    function changeBackgroundColor() {
-      document.body.style.backgroundColor = getLightColor();
+    function getDarkColor() {
+      const r = Math.floor(Math.random() * 100); // 0–99
+      const g = Math.floor(Math.random() * 100);
+      const b = Math.floor(Math.random() * 100);
+      return `rgb(${r}, ${g}, ${b})`;
     }
 
-    // Initial change
+    function changeBackgroundColor() {
+      const color = mode === 'light' ? getLightColor() : getDarkColor();
+      document.body.style.backgroundColor = color;
+      document.body.style.color = mode === 'light' ? '#000' : '#fff';
+    }
+
+    function toggleMode() {
+      mode = mode === 'light' ? 'dark' : 'light';
+      document.getElementById('modeLabel').textContent = mode.charAt(0).toUpperCase() + mode.slice(1);
+      changeBackgroundColor();
+    }
+
+    // Initial color change
     changeBackgroundColor();
 
-    // Repeat every 3 seconds
-    setInterval(changeBackgroundColor, 3000);
+    // Change every 30 seconds
+    setInterval(changeBackgroundColor, 5000);
   </script>
 
 </body>
