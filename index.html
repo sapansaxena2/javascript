@@ -2,62 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Light & Dark Mode with Color Changer</title>
+  <title>Theme Toggle</title>
   <style>
     body {
-      transition: background-color 0.5s ease, color 0.5s ease;
       font-family: sans-serif;
+      transition: background-color 0.5s ease, color 0.5s ease;
       padding: 2rem;
     }
 
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      margin-top: 1rem;
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
       cursor: pointer;
+    }
+
+    .light-mode {
+      background-color: #f0f0f0;
+      color: #000;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #fff;
     }
   </style>
 </head>
-<body>
+<body class="light-mode">
 
-  <h1>Auto Background Color Changer</h1>
-  <p>Mode: <span id="modeLabel">Light</span></p>
-  <button onclick="toggleMode()">Toggle Mode</button>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+  <h1>Hello, Theme Switcher!</h1>
+  <p>Click the moon icon to toggle between light and dark modes.</p>
 
   <script>
-    let mode = 'light';
+    let isDark = false;
 
-    function getLightColor() {
-      const r = Math.floor(Math.random() * 76) + 180; // 180–255
-      const g = Math.floor(Math.random() * 76) + 180;
-      const b = Math.floor(Math.random() * 76) + 180;
-      return `rgb(${r}, ${g}, ${b})`;
+    function toggleTheme() {
+      const body = document.body;
+      isDark = !isDark;
+
+      if (isDark) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+      }
     }
-
-    function getDarkColor() {
-      const r = Math.floor(Math.random() * 100); // 0–99
-      const g = Math.floor(Math.random() * 100);
-      const b = Math.floor(Math.random() * 100);
-      return `rgb(${r}, ${g}, ${b})`;
-    }
-
-    function changeBackgroundColor() {
-      const color = mode === 'light' ? getLightColor() : getDarkColor();
-      document.body.style.backgroundColor = color;
-      document.body.style.color = mode === 'light' ? '#000' : '#fff';
-    }
-
-    function toggleMode() {
-      mode = mode === 'light' ? 'dark' : 'light';
-      document.getElementById('modeLabel').textContent = mode.charAt(0).toUpperCase() + mode.slice(1);
-      changeBackgroundColor();
-    }
-
-    // Initial color change
-    changeBackgroundColor();
-
-    // Change every 30 seconds
-    setInterval(changeBackgroundColor, 5000);
   </script>
 
 </body>
